@@ -160,7 +160,7 @@ function SavePopup() {
           <button
             onClick={handleCancel}
             className="flex-1 py-2 px-4 bg-red-100 hover:bg-red-200 text-red-800 font-medium rounded-lg transition-colors">
-            Cancel
+            Reset
           </button>
           <button
             onClick={handleSave}

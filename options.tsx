@@ -16,6 +16,7 @@ function OptionsPage() {
   })
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   useEffect(() => {
     loadConfig()
@@ -55,6 +56,7 @@ function OptionsPage() {
 
   const handleUpdate = async () => {
     setError("")
+    setShowSuccess(false)
     setIsLoading(true)
 
     const isValid = await validateConfig(config)
@@ -65,15 +67,15 @@ function OptionsPage() {
     }
 
     await storage.set("blinkoConfig", JSON.stringify(config))
+    setShowSuccess(true)
+    setTimeout(() => {
+      setShowSuccess(false)
+    }, 2000)
     setIsLoading(false)
   }
 
   const handleClose = () => {
     window.close()
-  }
-
-  const handleCancel = () => {
-    loadConfig()
   }
 
   return (
@@ -130,16 +132,17 @@ function OptionsPage() {
           </div>
         )}
 
-        <div className="flex justify-between gap-4">
-          <button
-            onClick={handleCancel}
-            className="flex-1 py-2 px-4 bg-yellow-100 hover:bg-yellow-200 text-gray-800 font-medium rounded-lg transition-colors">
-            cancel
-          </button>
+        {showSuccess && (
+          <div className="bg-green-50 text-green-600 p-3 rounded-lg text-sm">
+            配置更新成功
+          </div>
+        )}
+
+        <div className="flex justify-end">
           <button
             onClick={handleUpdate}
             disabled={isLoading}
-            className="flex-1 py-2 px-4 bg-yellow-100 hover:bg-yellow-200 text-gray-800 font-medium rounded-lg transition-colors">
+            className="w-32 py-2 px-4 bg-yellow-100 hover:bg-yellow-200 text-gray-800 font-medium rounded-lg transition-colors">
             {isLoading ? "updating..." : "update"}
           </button>
         </div>
