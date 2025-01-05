@@ -79,9 +79,9 @@ function OptionsPage() {
   }
 
   return (
-    <div className="w-[600px] min-h-[400px] bg-white p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold text-gray-800">save to blinko</h1>
+    <div className="w-[480px] min-h-[400px] bg-white p-8">
+      <div className="flex justify-between items-center mb-8 -mx-8 -mt-8 px-8">
+        <h1 className="text-2xl font-bold text-gray-800 bg-purple-200 px-4 py-2 rounded-r-full w-[400px]">save to blinko</h1>
         <button
           onClick={handleClose}
           className="text-gray-500 hover:text-gray-700">
