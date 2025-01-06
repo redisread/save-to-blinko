@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Storage } from "@plasmohq/storage"
 import "./style.css"
 
@@ -21,9 +21,11 @@ function SavePopup() {
   const [isLoading, setIsLoading] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [config, setConfig] = useState<BlinkoConfig | null>(null)
+  const contentRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     loadConfig()
+    contentRef.current?.focus()
   }, [])
 
   const loadConfig = async () => {
@@ -122,6 +124,7 @@ function SavePopup() {
           </div>
           <div className="bg-gray-50 rounded-lg p-4">
             <textarea
+              ref={contentRef}
               className="w-full h-32 bg-transparent resize-none focus:outline-none text-gray-600"
               value={content}
               onChange={(e) => setContent(e.target.value)}
